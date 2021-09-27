@@ -25,13 +25,7 @@ public class StartAkka {
     }
 
     private void run(String[] args) {
-        Map<String, Object> overrides = new HashMap<>();
-        String port = ArgumentUtil.getAkkaPort(args);
-        overrides.put("akka.remote.artery.canonical.port", port);
-
-        Config config = ConfigFactory.parseMap(overrides)
-                .withFallback(ConfigFactory.load());
-        system = ActorSystem.create(RentARoom.create(), "RentARoomSystem",config);
+        system = ActorSystem.create(RentARoom.create(), "RentARoomSystem");
 
         commandLoop();
 
