@@ -2,16 +2,10 @@ package nl.saxion.concurrency;
 
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.javadsl.AskPattern;
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import nl.saxion.concurrency.actors.RentARoom;
-import nl.saxion.concurrency.domain.Hotel;
 import nl.saxion.concurrency.messages.RentARoomMessage;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.CompletionStage;
 
@@ -36,7 +30,7 @@ public class StartAkka {
         String help = "Commands:\n" +
                 "\n" +
                 "L: List hotels\n" +
-                "B: Add broker\n" +
+                "B: Add agent\n" +
                 "H: Add hotels\n" +
                 "D: Delete hotels\n" +
                 "R: Request reservation\n" +
@@ -59,7 +53,7 @@ public class StartAkka {
                     addHotel();
                     break;
                 case "b":
-                    addBroker();
+                    addAgent();
                     break;
                 case "r":
                     requestReservation();
@@ -79,8 +73,8 @@ public class StartAkka {
 
     }
 
-    private void addBroker() {
-        //todo: add broker to the system
+    private void addAgent() {
+        //todo: add an agent to the system
     }
 
     private void requestReservation() {
