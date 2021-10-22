@@ -224,8 +224,7 @@ public class StartAkka {
             System.out.println(status);
         }
     }
-
-
+    
 
     private void printReservationDetails(HashMap<String, Integer> reservation){
         if(reservation.size() > 0){

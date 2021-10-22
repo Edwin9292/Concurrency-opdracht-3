@@ -100,13 +100,16 @@ public class Agent extends AbstractBehavior<RentARoomMessage> {
      * @return
      */
     private Behavior<RentARoomMessage> handleHotelDataRequest(RentARoomMessage.ListHotels message){
-        ActorRef dataAggregator = getContext().spawn(HotelDataAggregator.create(), "hotelDataAggregator" + (int)(Math.random()*1000));
-
-        dataAggregator.tell(new RentARoomMessage.hotelMessagesToExpect(message.sender, hotels.size()));
-        for (ActorRef<RentARoomMessage> hotelManager: hotels.values()) {
-            hotelManager.tell(new RentARoomMessage.RequestHotelInformation("", dataAggregator));
+        if(hotels.size() > 0){
+            ActorRef dataAggregator = getContext().spawn(HotelDataAggregator.create(), "hotelDataAggregator" + (int)(Math.random()*1000));
+            dataAggregator.tell(new RentARoomMessage.hotelMessagesToExpect(message.sender, hotels.size()));
+            for (ActorRef<RentARoomMessage> hotelManager: hotels.values()) {
+                hotelManager.tell(new RentARoomMessage.RequestHotelInformation("", dataAggregator));
+            }
         }
-
+        else{
+            message.sender.tell(new RentARoomMessage.Response("There are currently no hotels! Press 'H' to create a hotel!"));
+        }
         return Behaviors.same();
     }
 
@@ -138,7 +141,6 @@ public class Agent extends AbstractBehavior<RentARoomMessage> {
         reservationAggregator.tell(new RentARoomMessage.hotelMessagesToExpect(message.replyTo, message.reservation.size()));
 
         //send the reservation request to every hotel from the reservation
-        ArrayList<ActorRef> reservationHotelActors = new ArrayList<>();
         for(Map.Entry<String, Integer> hotelReservation: message.reservation.entrySet()){
             ActorRef<RentARoomMessage> hotelManager = hotels.get(hotelReservation.getKey());
             hotelManager.tell(new RentARoomMessage.HotelReservation(hotelReservation.getValue(), reservationAggregator));

@@ -14,7 +14,7 @@ public class Hotel implements Serializable {
     public final String id = UUID.randomUUID().toString();
     public final String name;
 
-    //hashmap of roomID and status of availability
+    //hashmap of roomID and Room
     HashMap<String, Room> rooms = new HashMap<>();
     int occupiedRooms = 0;
 
