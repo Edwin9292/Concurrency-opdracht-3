@@ -34,12 +34,19 @@ public interface RentARoomMessage extends Serializable {
 
     // Request hotel information from hotelManagers
     class RequestHotelInformation implements RentARoomMessage {
-        public final String hotelInformation;
         public final ActorRef sendTo;
 
-        public RequestHotelInformation(String hotelInformation, ActorRef sendTo){
-            this.hotelInformation = hotelInformation;
+        public RequestHotelInformation(ActorRef sendTo){
             this.sendTo = sendTo;
+        }
+    }
+    // Request hotel information from hotelManagers
+
+    class RequestHotelInformationReply implements RentARoomMessage {
+        public final String hotelInformation;
+
+        public RequestHotelInformationReply(String hotelInformation){
+            this.hotelInformation = hotelInformation;
         }
     }
 
@@ -122,6 +129,7 @@ public interface RentARoomMessage extends Serializable {
             this.aggregator = aggregator;
         }
     }
+
     class HotelReservationReply implements RentARoomMessage{
         public final boolean status;
         public final ActorRef sender;
@@ -143,6 +151,7 @@ public interface RentARoomMessage extends Serializable {
             this.replyTo = replyTo;
         }
     }
+
     class CancelReservationReply implements RentARoomMessage{
         public final boolean status;
         public final ActorRef sender;

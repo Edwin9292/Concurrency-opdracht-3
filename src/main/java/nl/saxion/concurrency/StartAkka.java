@@ -36,7 +36,7 @@ public class StartAkka {
                 "D: Delete hotels\n" +
                 "R: Request reservation\n" +
                 "X: Cancel reservation\n" +
-                "C: Confirm resrvation\n" +
+                "C: Confirm reservation\n" +
                 "?: This menu\n" +
                 "Q: Quit\n";
         System.out.println(help);
@@ -224,7 +224,7 @@ public class StartAkka {
             System.out.println(status);
         }
     }
-    
+
 
     private void printReservationDetails(HashMap<String, Integer> reservation){
         if(reservation.size() > 0){

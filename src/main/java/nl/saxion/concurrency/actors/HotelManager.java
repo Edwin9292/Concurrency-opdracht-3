@@ -46,7 +46,7 @@ public class HotelManager extends AbstractBehavior<RentARoomMessage> {
      * @return
      */
     private Behavior<RentARoomMessage> handleDataRequest(RentARoomMessage.RequestHotelInformation message) {
-        message.sendTo.tell(new RentARoomMessage.RequestHotelInformation(hotel.toString(), message.sendTo));
+        message.sendTo.tell(new RentARoomMessage.RequestHotelInformationReply(hotel.toString()));
         return Behaviors.same();
     }
 

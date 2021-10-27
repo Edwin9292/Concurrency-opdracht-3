@@ -27,7 +27,7 @@ public class HotelDataAggregator extends AbstractBehavior<RentARoomMessage> {
     public Receive<RentARoomMessage> createReceive() {
         return newReceiveBuilder()
             .onMessage(RentARoomMessage.hotelMessagesToExpect.class, this::dataToReceive)
-            .onMessage(RentARoomMessage.RequestHotelInformation.class, this::receiveData)
+            .onMessage(RentARoomMessage.RequestHotelInformationReply.class, this::receiveData)
             .build();
     }
 
@@ -37,7 +37,7 @@ public class HotelDataAggregator extends AbstractBehavior<RentARoomMessage> {
      * @param message message containing the hotel information.
      * @return
      */
-    private Behavior<RentARoomMessage> receiveData(RentARoomMessage.RequestHotelInformation message){
+    private Behavior<RentARoomMessage> receiveData(RentARoomMessage.RequestHotelInformationReply message){
         if(builder.length() > 0){
             builder.append("\n\n " + message.hotelInformation);
         }

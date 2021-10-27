@@ -13,6 +13,7 @@ public class Agent extends AbstractBehavior<RentARoomMessage> {
     private final HashMap<String, ActorRef<RentARoomMessage>> hotels = new HashMap<>();
     private static final HashMap<String, ActorRef<RentARoomMessage>> reservationAggregators = new HashMap<>();
 
+
     public Agent(ActorContext<RentARoomMessage> context) {
         super(context);
 
@@ -104,7 +105,7 @@ public class Agent extends AbstractBehavior<RentARoomMessage> {
             ActorRef dataAggregator = getContext().spawn(HotelDataAggregator.create(), "hotelDataAggregator" + (int)(Math.random()*1000));
             dataAggregator.tell(new RentARoomMessage.hotelMessagesToExpect(message.sender, hotels.size()));
             for (ActorRef<RentARoomMessage> hotelManager: hotels.values()) {
-                hotelManager.tell(new RentARoomMessage.RequestHotelInformation("", dataAggregator));
+                hotelManager.tell(new RentARoomMessage.RequestHotelInformation(dataAggregator));
             }
         }
         else{
