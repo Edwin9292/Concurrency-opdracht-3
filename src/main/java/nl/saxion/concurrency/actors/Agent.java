@@ -49,6 +49,8 @@ public class Agent extends AbstractBehavior<RentARoomMessage> {
      * @param message message containing a list of all currently active hotel managers.
      * @return
      */
+    //Deze methode is gebaseerd op de uitwerking van opgave 1d van week 6,
+    //van het vak Concurency leerjaar 2021-2022 aan Saxion Hogeschool te Enschede.
     private Behavior<RentARoomMessage> updateHotelList(RentARoomMessage.ReceiveHotelsList message){
         List<String> deleteList = new ArrayList<>();
 
